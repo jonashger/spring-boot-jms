@@ -1,0 +1,78 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+	<changeSet id="criar_tb_emailconfiguracao" author="jonas">
+		<preConditions onFail="CONTINUE">
+			<not>
+				<tableExists tableName="tb_emailconfiguracao" />
+			</not>
+		</preConditions>
+		<createTable tableName="tb_emailconfiguracao">
+			<column name="id_emailconfiguracao" type="numeric(10,0)" remarks="ID DO EMAIL">
+				<constraints primaryKey="true" nullable="false"	primaryKeyName="pk_emailconfiguracao" />
+			</column>
+			<column name="tx_tenant" type="varchar(50)" remarks="TENANT QUE SERÁ USADO">
+				<constraints nullable="false"/>
+			</column>
+			<column name="cd_modulo" type="numeric(2,0)" remarks="MÓDULO QUE SERÁ USADO PARA O ENVIO" >
+				<constraints nullable="false"/>
+			</column>
+			<column name="tx_emailremetente" type="varchar(255)" remarks="EMAIL DO USUARIO QUE ESTARÁ ENVIANDO OS EMAILS">
+				<constraints nullable="false"/>
+			</column>
+			<column name="tx_nomeremetente" type="varchar(60)" remarks="NOME DO REMETENTE PARA SER USADO NO ENVIO DE EMAIL">
+				<constraints nullable="false" />
+			</column>	
+			<column name="tx_emailsenha" type="varchar(60)" remarks="SENHA DO EMAIL QUE SERÁ USADO PARA ENVIO DO EMAIL">
+				<constraints nullable="false" />
+			</column>
+			
+			<column name="tx_host" type="varchar(255)" remarks="HOST DO SERVIDOR DE ENVIO DE EMAIL">
+				<constraints nullable="false" />
+			</column>
+			
+			<column name="tx_porta" type="numeric(5,0)" remarks="NUMERO DA PORTA DO EMAIL">
+				<constraints nullable="false" />
+			</column>
+	
+			<column name="fl_ssl" type="boolean" defaultValueBoolean="false" remarks="SERVIDOR UTILIZA SSL"/>
+
+		</createTable>
+		<createSequence sequenceName="gen_emailconfiguracao" startValue="1" />
+	</changeSet>
+	
+	<changeSet id="criar_tb_email" author="jonas">
+		<preConditions onFail="CONTINUE">
+			<not>
+				<tableExists tableName="tb_email" />
+			</not>
+		</preConditions>
+		<createTable tableName="tb_email">
+			<column name="id_email" type="numeric(10,0)" remarks="ID DO EMAIL">
+				<constraints primaryKey="true" nullable="false"	primaryKeyName="pk_email" />
+			</column>
+			<column name="tx_tenant" type="varchar(50)" remarks="TENANT QUE SERÁ USADO">
+				<constraints nullable="false"/>
+			</column>
+			<column name="cd_modulo" type="NUMERIC(2,0)" remarks="MÓDULO QUE SERÁ USADO PARA O ENVIO">
+				<constraints nullable="false"/>
+			</column>
+			<column name="tx_para" type="varchar(255)" remarks="EMAIL DO USUARIO QUE RECEBERÁ O EMAIL">
+				<constraints nullable="false"/>
+			</column>
+			<column name="tx_assunto" type="varchar(100)" remarks="ASSUNTO DO EMAIL">
+				<constraints nullable="false" />
+			</column>	
+			<column name="bl_corpomensagem" type="bytea" remarks="CONTEUDO DO ENVIO DA MENSAGEM">
+				<constraints nullable="false" />
+			</column>
+
+		</createTable>
+		<createSequence sequenceName="gen_email" startValue="1" />
+	</changeSet>
+	
+
+</databaseChangeLog>
