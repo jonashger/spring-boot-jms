@@ -1,4 +1,4 @@
-package br.com.jonashger.jms.repositories;
+package br.com.jonashger.jms.repository;
 
 public interface EmailRepositoryCustom {
 

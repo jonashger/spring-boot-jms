@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.jonashger.jms.dto.EmailDTO;
+import br.com.jonashger.jms.model.EmailConfiguracao;
 import lombok.extern.log4j.Log4j2;
 
 @RestController
@@ -23,5 +24,12 @@ public class EmailController {
 		log.info("Sending a transaction.");
 
 		jmsTemplate.convertAndSend("EmailQueue", emailDTO);
+	}
+
+	@PostMapping("/saveNewEmail")
+	public void send(@RequestBody EmailConfiguracao emailConfiguracao) {
+		log.info("Saving a new config from Email");
+
+		jmsTemplate.convertAndSend("SaveEmailQueue", emailConfiguracao);
 	}
 }

@@ -5,7 +5,7 @@
 
 
 	<changeSet id="criar_tb_emailconfiguracao" author="jonas">
-		<preConditions onFail="CONTINUE">
+		<preConditions >
 			<not>
 				<tableExists tableName="tb_emailconfiguracao" />
 			</not>
@@ -29,17 +29,13 @@
 			<column name="tx_emailsenha" type="varchar(60)" remarks="SENHA DO EMAIL QUE SERÁ USADO PARA ENVIO DO EMAIL">
 				<constraints nullable="false" />
 			</column>
-			
 			<column name="tx_host" type="varchar(255)" remarks="HOST DO SERVIDOR DE ENVIO DE EMAIL">
 				<constraints nullable="false" />
 			</column>
-			
 			<column name="tx_porta" type="numeric(5,0)" remarks="NUMERO DA PORTA DO EMAIL">
 				<constraints nullable="false" />
 			</column>
-	
 			<column name="fl_ssl" type="boolean" defaultValueBoolean="false" remarks="SERVIDOR UTILIZA SSL"/>
-
 		</createTable>
 		<createSequence sequenceName="gen_emailconfiguracao" startValue="1" />
 	</changeSet>
